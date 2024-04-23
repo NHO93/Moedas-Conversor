@@ -26,3 +26,4 @@ _____________________
 ______
 
 Conceitos de Java aplicados como: consumo de API, herança, polimorfismo, entre outros.
+![Badge-Conversor](https://github.com/NHO93/Moedas-Conversor/assets/141922637/64a38dd1-ee88-44fe-a378-a186567fbe67)
