@@ -17,7 +17,7 @@ import java.util.Map;
 public class ConectaApi {
     public String paraConverter(String moedaRecebida, String moedaConvertida,
                                 double valorConversao) throws ConnectException {
-        final String chaveApiKey = "76e817442e7bc981ba9d77ad"; //Sua Chave De API Aqui;
+        final String chaveApiKey = " "; //Sua Chave De API Aqui;
 
         try {
             final URI uri = URI.create("\"https://v6.exchangerate-api.com/v6/" + chaveApiKey +
