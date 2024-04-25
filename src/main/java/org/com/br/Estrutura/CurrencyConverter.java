@@ -22,13 +22,20 @@ public class CurrencyConverter {
     private static final String API_KEY = "76e817442e7bc981ba9d77ad";
     private static final String API_URL = "https://open.er-api.com/v6/latest/";
 
-    public static double convertCurrency(String fromCurrency, String toCurrency, double amount) throws IOException {
-        String urlString = API_URL + fromCurrency;
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    public static double convertCurrency
+            (String fromCurrency, String toCurrency, double amount)
+            throws IOException {
+
+        String endereco = API_URL + fromCurrency;
+        URL url = new URL(endereco);
+
+        HttpURLConnection connection =
+                (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        BufferedReader reader = new BufferedReader
+                (new InputStreamReader(connection.getInputStream()));
+
         StringBuilder response = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
@@ -37,57 +44,10 @@ public class CurrencyConverter {
         reader.close();
 
         JSONObject jsonObject = new JSONObject(response.toString());
-        double rate = jsonObject.getJSONObject("rates").getDouble(toCurrency);
+
+        double rate = jsonObject.getJSONObject
+                ("rates").getDouble(toCurrency);
+
         return amount * rate;
-    }
-
-    public static String main(String[] args) {
-        try {
-            String moedaRecebida = "";
-            String chaveApiKey = "76e817442e7bc981ba9d77ad";
-            final URI uri = URI.create("https://v6.exchangerate-api.com/v6/" + chaveApiKey + "/latest/" + moedaRecebida);
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder().uri(uri).build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            String json = response.body();
-
-            if (response.statusCode() == 200) {
-                System.out.println("Erro na conexão: " + response.statusCode());
-            }
-            Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-            MoedaRecebida moedaRecebidaObj = gson.fromJson(json, MoedaRecebida.class);
-            String moedaConvertida = "";
-            double valorConversao = 0;
-            double coinValue = getCoinValue(moedaConvertida, valorConversao, moedaRecebidaObj);
-            String coinValueFinal = formatValue(coinValue);
-            String valueFinal = formatValue(valorConversao);
-
-            return "O valor de " + moedaRecebida + " " + valueFinal + " é igual a "
-                    + moedaConvertida + " " + coinValueFinal + ".";
-        } catch (IOException e) {
-            throw new RuntimeException("Erro na conexão com a API: " + e.getMessage(), e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Conexão com a API interrompida: " + e.getMessage(), e);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Erro inesperado: " + e.getMessage(), e);
-        }
-    }
-
-    private static double getCoinValue(String moedaConvertida, double valorConversao, @NotNull MoedaRecebida moedaRecebidaObj) {
-        Map<String, Double> conversorMoedas = moedaRecebidaObj.conversionRates();
-        if (conversorMoedas == null || conversorMoedas.isEmpty()) {
-            throw new RuntimeException("Erro ao converter moedas");
-        }
-        Double taxaConversao = conversorMoedas.get(moedaConvertida);
-        if (taxaConversao == null) {
-            throw new RuntimeException("Erro na taxa de conversão das moedas");
-        }
-        return valorConversao * taxaConversao;
-    }
-
-    private static String formatValue(double valorConversao) {
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(valorConversao);
     }
 }
