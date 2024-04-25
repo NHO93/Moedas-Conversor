@@ -1,22 +1,14 @@
 package org.com.br.Estrutura;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
+
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.text.DecimalFormat;
-import java.util.Map;
+
 
 public class CurrencyConverter {
     private static final String API_KEY = "76e817442e7bc981ba9d77ad";
