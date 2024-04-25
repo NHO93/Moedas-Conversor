@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class API {
     private static final String API_URL =
-            "https://v6.exchangerate-api.com/v6/76e817442e7bc981ba9d77ad/latest/USD";
+            "https://v6.exchangerate-api.com/v6//latest/USD";
 
     public static double obterTaxaDeCambio(String moedaOrigem, String moedaDestino)
             throws IOException, InterruptedException, URISyntaxException, JSONException {
