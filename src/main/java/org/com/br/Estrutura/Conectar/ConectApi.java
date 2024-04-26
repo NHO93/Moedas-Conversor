@@ -18,7 +18,7 @@ public class ConectApi {
     public String paraConverter
             (String moedaRecebida, String moedaComvertida, double valorConversao)
             throws ConnectException {
-        final String chaveApiKey = "76e817442e7bc981ba9d77ad";
+        final String chaveApiKey = "Sua chave aqui";
 
         try {
             final URI uri = new URI
